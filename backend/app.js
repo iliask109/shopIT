@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 
 // import all the routes
 
-const products = require("./routes/products");
+const products = require("./routes/product");
 const auth = require("./routes/auth");
 const payment = require("./routes/payment");
 const orders = require("./routes/orders");
