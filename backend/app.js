@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 const products = require("./routes/product");
 const auth = require("./routes/auth");
 const payment = require("./routes/payment");
-const orders = require("./routes/orders");
+const orders = require("./routes/order");
 
 app.use("/api/v1", products);
 app.use("/api/v1", auth);
