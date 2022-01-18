@@ -5,8 +5,8 @@ const app = require("./app");
 // const cloudinary = require('cloudinary')
 const cloudinary = require("cloudinary").v2;
 
-if (process.env.NODE_ENV !== "PRODUCTION")
-  require("dotenv").config({ path: "backend/config/config.env" });
+// if (process.env.NODE_ENV !== "PRODUCTION")
+//   require("dotenv").config({ path: "backend/config/config.env" });
 
 // dotenv.config({ path: path.join(__dirname, 'config/.env') })
 
