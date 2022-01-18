@@ -7,10 +7,8 @@ const dotenv = require("dotenv");
 const path = require("path");
 
 // Setting up config file
-if (process.env.NODE_ENV !== "production")
-  require("dotenv").config({
-    path: path.join(__dirname, "backend/config/.env"),
-  });
+if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'backend/config/config.env' })
+
 
 const app = express();
 
