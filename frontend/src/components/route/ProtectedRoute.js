@@ -1,33 +1,31 @@
-import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "../../actions/userActions";
+import React, { Fragment } from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const ProtectedRoute = ({ children, isAdmin }) => {
-  const {
-    isAuthenticated = false,
-    loading = true,
-    user,
-  } = useSelector((state) => state.auth);
+const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
 
-  const dispatch = useDispatch();
+    const { isAuthenticated, loading, user } = useSelector(state => state.auth)
 
-  useEffect(() => {
-    if (!user) {
-      dispatch(loadUser());
-    }
-  }, [isAuthenticated, loading, dispatch, user]);
+    return (
+        <Fragment>
+            {loading === false && (
+                <Route
+                    {...rest}
+                    render={props => {
+                        if (isAuthenticated === false) {
+                            return <Redirect to='/login' />
+                        }
 
-  if (loading) return <h1>loading...</h1>;
+                        if (isAdmin === true && user.role !== 'admin') {
+                            return <Redirect to="/" />
+                        }
 
-  if (!loading && isAuthenticated) {
-    if (isAdmin === true && user.role !== "admin") {
-      return <Navigate to="/" />;
-    }
-    return children;
-  } else {
-    return <Navigate to={"/login"} />;
-  }
-};
+                        return <Component {...props} />
+                    }}
+                />
+            )}
+        </Fragment>
+    )
+}
 
-export default ProtectedRoute;
+export default ProtectedRoute
